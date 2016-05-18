@@ -95,13 +95,25 @@ function standardInputTest(){
 }
 
 function wonkyInputTest(){
-	var sampleArea = "5 5 3 3";
-	var sampleDir1 = "1 2 N";
-	var instruct1 = "LMLMLMLMM";
-	var sampleDir2 = "-3 -1 E";
-	var instruct2 = "MMRMMLMMMR";
+	var sampleArea = "4 6 6 3";
+	var sampleDir1 = "-1 2 N";
+	var instruct1 = "LMMMMMMMMMMMMM";
+	var sampleDir2 = "3 -2 W";
+	var instruct2 = "RMRLMMM";
+
+	var expectedOutput = "rover out of bounds";
+
+	var actualOutput;
+
+	try {
+		roverCom(sampleArea, sampleDir1, instruct1, sampleDir2, instruct2);
+	} catch(err) {
+		actualOutput = err;
+	}
+	
+	return expectedOutput === actualOutput;
 }
 
-console.log(standardInputTest());
+console.log(wonkyInputTest());
 
 
