@@ -17,7 +17,9 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 		pathMatrix.forEach(function(elem, idx){
 			if(elem[0] === dir) {
 				path = elem;
+				console.log("running path matrix p is", path);
 				pmIdx = idx;
+				console.log("running path matrix p is", pmIdx);
 			} 
 		});
 	}
@@ -54,7 +56,10 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 	console.log("r1", r1Output);
 
 	startChecker(start_2);
-	determineStart(start_2);
+	determineStart(start_2[2]);
+	console.log("x is now", x);
+	console.log("y is now", y);
+	console.log("path is now", path);
 
 	for(i = 0; i < dir_2.length; i++) {
 		if(dir_2[i] === "L") {
