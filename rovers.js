@@ -122,7 +122,7 @@ function standardInputTest(){
 	return expectedOutput === actualOutput;
 }
 
-//when a cat stands on the m key
+//when a cat stands on the 'm' key
 function wonkyInputTest(){
 	var sampleArea = "4 6 6 3";
 	var sampleDir1 = "-1 2 N";
@@ -145,7 +145,7 @@ function wonkyInputTest(){
 	return expectedOutput === actualOutput;
 }
 
-//when you hit the wrong key for the instructions
+//hitting the wrong key for the instructions
 function badInstructionsTest() {
 	var sampleArea = "10 10 8 10";
 	var sampleDir1 = "2 2 N";
