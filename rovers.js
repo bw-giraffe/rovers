@@ -2,7 +2,6 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 	plateau = plateau.split(" ");
 	start_1 = start_1.split(" ");
 	start_2 = start_2.split(" ");
-	console.log(start_2);
 	// dir_1 = dir_1.split(" ");
 	var x = 0;
 	var y = 0;
@@ -17,9 +16,7 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 		pathMatrix.forEach(function(elem, idx){
 			if(elem[0] === dir) {
 				path = elem;
-				console.log("running path matrix p is", path);
 				pmIdx = idx;
-				console.log("running path matrix p is", pmIdx);
 			} 
 		});
 	}
@@ -39,53 +36,54 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 		var south = Math.abs(plateau[2]) * -1;
 		var east = parseInt(plateau[1]);
 		var north = parseInt(plateau[0]);
-		if(y > north || y < south || x > east || x < west) {
+		if(x < west) {
+			throw "rover out of bounds";
+		} else if(y < south) {
+			throw "rover out of bounds";
+		}else if(x > east) {
+			throw "rover out of bounds";
+		}else if(y > north) {
 			console.log("OUT OF BOUNDSSSSS");
-			return "rover out of bounds"
+			throw "rover out of bounds";
 		} else {
-			return false;
+			return true
 		}
 	}
 
 	function move(directions) {
 		for(i = 0; i < directions.length; i++) {
-			if(notOutOfBounds(plateau, x, y)) {
-				if(directions[i] === "L") {
-					pmIdx = ((pmIdx+4-1) % 4);
-					path = pathMatrix[pmIdx];
-				} else if(directions[i] === "R") {
-					pmIdx = ((pmIdx+4+1) % 4);
-					path = pathMatrix[pmIdx];
-				} else if(directions[i] === "M") {
-					if(path[1] === "y") {
-						y = parseInt(y) + parseInt(path[2]);
-					} else if(path[1] === "x") {
-						x = parseInt(x) + parseInt(path[2]);
-					}
-				} else {
-					return "invalid input please use L, R, or M"
+			if(directions[i] === "L") {
+				pmIdx = ((pmIdx+4-1) % 4);
+				path = pathMatrix[pmIdx];
+			} else if(directions[i] === "R") {
+				pmIdx = ((pmIdx+4+1) % 4);
+				path = pathMatrix[pmIdx];
+			} else if(directions[i] === "M") {
+				if(path[1] === "y") {
+					y = parseInt(y) + parseInt(path[2]);
+			
+				} else if(path[1] === "x") {
+					x = parseInt(x) + parseInt(path[2]);
 				}
 			} else {
-				return "aborting mission, rover is out of bounds"
+				throw "invalid input please use L, R, or M"
 			}
 		}
+		if(notOutOfBounds(plateau, x, y)) {
+			return x + " " + y + " " + path[0];
+		} 
 	}
 
-	move(dir_1);
-	r1Output = x + " " + y + " " + path[0];
-
-	move(dir_2);
+	r1Output = move(dir_1);
 	determineXY(start_2);
 	determineDir(start_2[2]);
-	move(dir_2);
-
-	r2Output = x + " " + y + " " + path[0];
+	r2Output = move(dir_2);
 	
 	return r1Output + "\n" + r2Output
 
 }
 
-console.log(roverCom("5 5 3 3", "1 2 N", "LMMMMMMMMMMMMMMMMM", "-3 -1 E", "MMRMMLMMMR"));
+console.log(roverCom("5 5 3 3", "1 2 N", "LMLMLMLMM", "-3 -1 E", "MMRMMLMMMR"));
 
 
 
