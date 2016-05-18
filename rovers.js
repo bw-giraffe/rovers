@@ -10,12 +10,17 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 	var pmIdx = 0;
 	var path;
 
-	pathMatrix.forEach(function(elem, idx){
-		if(elem[0] === start_1[2]) {
-			path = elem;
-			pmIdx = idx;
-		} 
-	});
+	startChecker(start_1);
+	determineStart(start_1[2]);
+
+	function determineStart(dir) {
+		pathMatrix.forEach(function(elem, idx){
+			if(elem[0] === dir) {
+				path = elem;
+				pmIdx = idx;
+			} 
+		});
+	}
 
 	function startChecker(startingpos) {
 		if(startingpos.length != 3) {
@@ -45,6 +50,32 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 		}
 	}
 
+	r1Output = x + " " + y + " " + path[0];
+	console.log("r1", r1Output);
+
+	startChecker(start_2);
+	determineStart(start_2);
+
+	for(i = 0; i < dir_2.length; i++) {
+		if(dir_2[i] === "L") {
+			pmIdx = ((pmIdx+4-1) % 4);
+			path = pathMatrix[pmIdx];
+		} else if(dir_2[i] === "R") {
+			pmIdx = ((pmIdx+4+1) % 4);
+			path = pathMatrix[pmIdx];
+		} else if(dir_2[i] === "M") {
+			if(path[1] === "y") {
+				y = parseInt(y) + parseInt(path[2]);
+			} else if(path[1] === "x") {
+				x = parseInt(x) + parseInt(path[2]);
+			}
+		} else {
+			return "invalid input please use L, R, or M"
+		}
+	}
+
+	r2Output = x + " " + y + " " + path[0];
+	console.log("r2", r2Output);
 
 
 }
