@@ -80,7 +80,7 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 
 }
 
-
+//sample input output test
 function standardInputTest(){
 	var sampleArea = "5 5 3 3";
 	var sampleDir1 = "1 2 N";
@@ -94,6 +94,7 @@ function standardInputTest(){
 	return expectedOutput === actualOutput;
 }
 
+//when a cat stands on the m key
 function wonkyInputTest(){
 	var sampleArea = "4 6 6 3";
 	var sampleDir1 = "-1 2 N";
@@ -110,10 +111,29 @@ function wonkyInputTest(){
 	} catch(err) {
 		actualOutput = err;
 	}
-	
 	return expectedOutput === actualOutput;
 }
 
-console.log(wonkyInputTest());
+//when you hit the wrong key for the instructions
+function badInstructionsTest() {
+	var sampleArea = "10 10 8 10";
+	var sampleDir1 = "2 2 N";
+	var instruct1 = "LMRMLMM";
+	var sampleDir2 = "-3 -2 W";
+	var instruct2 = "RMTLMMM";
+
+	var expectedOutput = "invalid input please use L, R, or M";
+
+	var actualOutput;
+
+	try {
+		roverCom(sampleArea, sampleDir1, instruct1, sampleDir2, instruct2);
+	} catch(err) {
+		actualOutput = err;
+	}
+
+	return expectedOutput === actualOutput;
+}
+
 
 
