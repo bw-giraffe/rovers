@@ -35,7 +35,7 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 		var north = parseInt(plateau[0]);
 		if(x < west) {
 			throw "rover out of bounds";
-		} else if(y < south) {
+		}else if(y < south) {
 			throw "rover out of bounds";
 		}else if(x > east) {
 			throw "rover out of bounds";
@@ -51,14 +51,13 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 			if(directions[i] === "L") {
 				pmIdx = ((pmIdx+4-1) % 4);
 				path = pathMatrix[pmIdx];
-			} else if(directions[i] === "R") {
+			}else if(directions[i] === "R") {
 				pmIdx = ((pmIdx+4+1) % 4);
 				path = pathMatrix[pmIdx];
-			} else if(directions[i] === "M") {
+			}else if(directions[i] === "M") {
 				if(path[1] === "y") {
 					y = parseInt(y) + parseInt(path[2]);
-			
-				} else if(path[1] === "x") {
+			}else if(path[1] === "x") {
 					x = parseInt(x) + parseInt(path[2]);
 				}
 			} else {
@@ -69,7 +68,7 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 			return x + " " + y + " " + path[0];
 		} 
 	}
-	
+
 	determineXY(start_1);
 	determineDir(start_1[2]);
 	r1Output = move(dir_1);
@@ -81,10 +80,28 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 
 }
 
-console.log(roverCom("5 5 3 3", "1 2 N", "LMLMLMLMM", "-3 -1 E", "MMRMMLMMMR"));
 
+function standardInputTest(){
+	var sampleArea = "5 5 3 3";
+	var sampleDir1 = "1 2 N";
+	var instruct1 = "LMLMLMLMM";
+	var sampleDir2 = "-3 -1 E";
+	var instruct2 = "MMRMMLMMMR";
 
+	var expectedOutput = "1 3 N" + "\n" + "2 -3 S";
 
+	var actualOutput = roverCom(sampleArea, sampleDir1, instruct1, sampleDir2, instruct2);
+	return expectedOutput === actualOutput;
+}
 
+function wonkyInputTest(){
+	var sampleArea = "5 5 3 3";
+	var sampleDir1 = "1 2 N";
+	var instruct1 = "LMLMLMLMM";
+	var sampleDir2 = "-3 -1 E";
+	var instruct2 = "MMRMMLMMMR";
+}
+
+console.log(standardInputTest());
 
 
