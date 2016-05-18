@@ -1,3 +1,28 @@
+/*
+Rich Rizzo
+Tuesday May 17th, 2016
+
+Ran and tested with Node.js.
+Let me show you what I've got.
+     ___          
+    . -^   `--,      
+   /# =========`-_   
+  /# (--====___====\ 
+ /#   .- --.  . --.| 
+/##   |  * ) (   * ),
+|##   \    /\ \   / |
+|###   ---   \ ---  |
+|####      ___)    #|
+|######           ##|
+ \##### ---------- / 
+  \####           (  
+   `\###          |  
+     \###         |  
+      \##        |   
+       \###.    .)   
+        `======/     
+*/
+
 function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 	plateau = plateau.split(" ");
 	start_1 = start_1.split(" ");
@@ -80,6 +105,7 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 
 }
 
+
 //sample input output test
 function standardInputTest(){
 	var sampleArea = "5 5 3 3";
@@ -89,8 +115,10 @@ function standardInputTest(){
 	var instruct2 = "MMRMMLMMMR";
 
 	var expectedOutput = "1 3 N" + "\n" + "2 -3 S";
-
 	var actualOutput = roverCom(sampleArea, sampleDir1, instruct1, sampleDir2, instruct2);
+	console.log("Input is: " + sampleArea + "\n" + sampleDir1 + "\n" + instruct1 + "\n" + sampleDir2 + "\n" + instruct2);
+	console.log("Actual output is: ", actualOutput);
+	console.log("Expected output is: ", expectedOutput + "\n");
 	return expectedOutput === actualOutput;
 }
 
@@ -111,6 +139,9 @@ function wonkyInputTest(){
 	} catch(err) {
 		actualOutput = err;
 	}
+	console.log("Input is: " + sampleArea + "\n" + sampleDir1 + "\n" + instruct1 + "\n" + sampleDir2 + "\n" + instruct2);
+	console.log("Actual output is: ", actualOutput);
+	console.log("Expected output is: ", expectedOutput + "\n");
 	return expectedOutput === actualOutput;
 }
 
@@ -131,9 +162,14 @@ function badInstructionsTest() {
 	} catch(err) {
 		actualOutput = err;
 	}
-
+	console.log("Input is: " + sampleArea + "\n" + sampleDir1 + "\n" + instruct1 + "\n" + sampleDir2 + "\n" + instruct2);
+	console.log("Actual output is: ", actualOutput);
+	console.log("Expected output is: ", expectedOutput + "\n");
 	return expectedOutput === actualOutput;
 }
 
+standardInputTest();
+wonkyInputTest();
+badInstructionsTest();
 
 
