@@ -2,15 +2,12 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 	plateau = plateau.split(" ");
 	start_1 = start_1.split(" ");
 	start_2 = start_2.split(" ");
-	// dir_1 = dir_1.split(" ");
+
 	var x = 0;
 	var y = 0;
 	var pathMatrix = [["N", "y", 1], ["E", "x", 1], ["S", "y", -1], ["W", "x", -1]];
 	var pmIdx = 0;
 	var path;
-
-	determineXY(start_1);
-	determineDir(start_1[2]);
 
 	function determineDir(dir) {
 		pathMatrix.forEach(function(elem, idx){
@@ -43,7 +40,6 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 		}else if(x > east) {
 			throw "rover out of bounds";
 		}else if(y > north) {
-			console.log("OUT OF BOUNDSSSSS");
 			throw "rover out of bounds";
 		} else {
 			return true
@@ -73,7 +69,9 @@ function roverCom(plateau, start_1, dir_1, start_2, dir_2) {
 			return x + " " + y + " " + path[0];
 		} 
 	}
-
+	
+	determineXY(start_1);
+	determineDir(start_1[2]);
 	r1Output = move(dir_1);
 	determineXY(start_2);
 	determineDir(start_2[2]);
